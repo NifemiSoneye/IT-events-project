@@ -17,9 +17,6 @@ const UserForm = ({ attendees, handleRegister }: userProps) => {
     phoneNumber: "",
     email: "",
   });
-  const [validEmail, setValidEmail] = useState<boolean>(false);
-  const [validUsername, setValidUsername] = useState<boolean>(false);
-  const [validPhoneNumber, setValidPhoneNumber] = useState<boolean>(false);
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     handleRegister(formData);
@@ -29,11 +26,9 @@ const UserForm = ({ attendees, handleRegister }: userProps) => {
       phoneNumber: "",
     });
   };
-  useEffect(() => {
-    setValidUsername(USERNAME_REGEX.test(formData.username));
-    setValidEmail(EMAIL_REGEX.test(formData.email));
-    setValidPhoneNumber(PHONE_REGEX.test(formData.phoneNumber));
-  }, [formData.username, formData.email, formData.phoneNumber]);
+  const validUsername = USERNAME_REGEX.test(formData.username);
+  const validEmail = EMAIL_REGEX.test(formData.email);
+  const validPhoneNumber = PHONE_REGEX.test(formData.phoneNumber);
   let canSubmit;
 
   if (validUsername && validPhoneNumber && validEmail) {
@@ -50,14 +45,34 @@ const UserForm = ({ attendees, handleRegister }: userProps) => {
         className="bg-white p-[1rem] border border-transparent rounded-xl"
       >
         <div className="flex flex-col mb-[1rem]">
-          <label htmlFor="full name" className="text-gray-500 text-xl">
-            Full name
-          </label>
+          <div className="flex justify-between">
+            <label
+              htmlFor="full name"
+              className="text-gray-500 text-xl font-semibold"
+            >
+              Full name
+            </label>
+            <p
+              className={
+                !validUsername && formData.username.length > 0
+                  ? "text-red-500 text-md font-semibold"
+                  : "hidden"
+              }
+            >
+              Enter a valid name
+            </p>
+          </div>
           <input
             type="text"
             required
             placeholder="Your name"
-            className="bg-gray-200 p-[0.5rem] border border-transparent rounded-lg"
+            className={`bg-gray-200 p-[0.5rem] rounded-lg border outline-none focus:outline-none ${
+              !validUsername && formData.username.length > 0
+                ? "border-red-600 focus:border-red-600"
+                : formData.username.length === 0
+                  ? "border-transparent"
+                  : "border-green-500"
+            }`}
             value={formData.username}
             onChange={(e) =>
               setFormData({ ...formData, username: e.target.value })
@@ -65,14 +80,34 @@ const UserForm = ({ attendees, handleRegister }: userProps) => {
           />
         </div>
         <div className="flex flex-col mb-[1rem]">
-          <label htmlFor="email" className="text-gray-500 text-xl">
-            Email Address
-          </label>
+          <div className="flex justify-between">
+            <label
+              htmlFor="full name"
+              className="text-gray-500 text-xl font-semibold"
+            >
+              Email Address
+            </label>
+            <p
+              className={
+                !validEmail && formData.email.length > 0
+                  ? "text-red-500 text-md font-semibold"
+                  : "hidden"
+              }
+            >
+              Enter a valid Email
+            </p>
+          </div>
           <input
             type="text"
             required
             placeholder="you@gmail.com"
-            className="bg-gray-200 p-[0.5rem] border border-transparent rounded-lg"
+            className={`bg-gray-200 p-[0.5rem] rounded-lg border outline-none focus:outline-none ${
+              !validEmail && formData.email.length > 0
+                ? "border-red-600 focus:border-red-600"
+                : formData.email.length === 0
+                  ? "border-transparent"
+                  : "border-green-500"
+            }`}
             value={formData.email}
             onChange={(e) =>
               setFormData({ ...formData, email: e.target.value })
@@ -80,14 +115,34 @@ const UserForm = ({ attendees, handleRegister }: userProps) => {
           />
         </div>
         <div className="flex flex-col mb-[1rem]">
-          <label htmlFor="full name" className="text-gray-500 text-xl">
-            Phone Number
-          </label>
+          <div className="flex justify-between">
+            <label
+              htmlFor="full name"
+              className="text-gray-500 text-xl font-semibold"
+            >
+              Phone Number
+            </label>
+            <p
+              className={
+                !validPhoneNumber && formData.phoneNumber.length > 0
+                  ? "text-red-500 text-md font-semibold text-nowrap"
+                  : "hidden"
+              }
+            >
+              Enter a valid Phone Number
+            </p>
+          </div>
           <input
             type="text"
             required
             placeholder="+234"
-            className="bg-gray-200 p-[0.5rem] border border-transparent rounded-lg"
+            className={`bg-gray-200 p-[0.5rem] rounded-lg border outline-none focus:outline-none ${
+              !validPhoneNumber && formData.phoneNumber.length > 0
+                ? "border-red-600 focus:border-red-600"
+                : formData.phoneNumber.length === 0
+                  ? "border-transparent"
+                  : "border-green-500"
+            }`}
             value={formData.phoneNumber}
             onChange={(e) =>
               setFormData({ ...formData, phoneNumber: e.target.value })
@@ -95,7 +150,11 @@ const UserForm = ({ attendees, handleRegister }: userProps) => {
           />
         </div>
         <button
-          className="bg-green-500 flex items-center justify-center text-[1.5rem] border border-transparent rounded-3xl p-[0.5rem] mb-[1rem] w-[100%]"
+          className={
+            canSubmit
+              ? "bg-green-500 flex items-center justify-center text-[1.5rem] border border-transparent rounded-3xl p-[0.5rem] mb-[1rem] w-[100%]"
+              : "bg-green-300 flex items-center justify-center text-[1.5rem] border border-transparent rounded-3xl p-[0.5rem] mb-[1rem] w-[100%]"
+          }
           disabled={!canSubmit}
         >
           Register Now{" "}
