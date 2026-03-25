@@ -1,8 +1,15 @@
+import { Routes, Route } from "react-router-dom";
+import Layout from "./Layout";
+import UserPage from "./UserPage";
+import AdminPage from "./AdminPage";
 function App() {
   return (
-    <h1 className="bg-green-400 text-black text-center text-5xl p-[2rem] font-bold text-nowrap">
-      I love pineapple
-    </h1>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<UserPage />} />
+        <Route path="admin" element={<AdminPage />} />
+      </Route>
+    </Routes>
   );
 }
 
