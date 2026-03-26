@@ -5,7 +5,7 @@ interface userProps {
   attendees: Attendee[];
   handleRegister: (formData: Omit<Attendee, "id">) => void;
 }
-const UserPage = ({ attendees, handleRegister } : userProps) => {
+const UserPage = ({ attendees, handleRegister }: userProps) => {
   const arrowIcon = new URL("./assets/right-arrow.png", import.meta.url).href;
   const groupImg = new URL("./assets/group.png", import.meta.url).href;
   const talkImg = new URL("./assets/talk.png", import.meta.url).href;
@@ -101,8 +101,8 @@ const UserPage = ({ attendees, handleRegister } : userProps) => {
           on building production-ready APIs and navigating a global tech career
           from Lagos
         </p>
-        <UserForm attendees={attendees} handleRegister={handleRegister} />
       </section>
+      <UserForm attendees={attendees} handleRegister={handleRegister} />
     </div>
   );
 };

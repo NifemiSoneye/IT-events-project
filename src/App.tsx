@@ -4,8 +4,12 @@ import UserPage from "./UserPage";
 import AdminPage from "./AdminPage";
 import { useState } from "react";
 import { type Attendee } from "./types";
+import useLocalStorage from "./hook/useLocalStorage";
 function App() {
-  const [attendees, setAttendees] = useState<Attendee[]>([]);
+  const [attendees, setAttendees] = useLocalStorage<Attendee[]>(
+    "attendees",
+    [],
+  );
   const handleRegister = (formData: Omit<Attendee, "id">) => {
     setAttendees((prev) => [...prev, { id: Date.now(), ...formData }]);
   };
