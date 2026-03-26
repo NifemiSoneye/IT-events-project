@@ -1,5 +1,3 @@
-import React from "react";
-
 const Nav = () => {
   const menuIcon = new URL("./assets/icon-hamburger.svg", import.meta.url).href;
   return (

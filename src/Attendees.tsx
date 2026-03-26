@@ -27,7 +27,7 @@ const Attendees = ({ attendees }: attendeeProps) => {
     return initials;
   };
   return (
-    <div className="bg-white mt-[2rem] p-[1rem]">
+    <div className="bg-[#303030] mt-[2rem] p-[1rem]">
       <h1 className="text-center font-bold text-3xl">Attendees</h1>
       <p className="font-semibold text-xl">Wanna Know Who else is coming?</p>
       <p className="font-semibold text-xl">
@@ -37,7 +37,7 @@ const Attendees = ({ attendees }: attendeeProps) => {
         attendees.map((a) => (
           <div
             key={a.id}
-            className="bg-gray-200 p-[0.5rem] rounded-lg border outline-none focus:outline-none my-[1rem]"
+            className="bg-[#515151] p-[0.5rem] rounded-lg border outline-none focus:outline-none my-[1rem]"
           >
             <div className="flex items-center">
               <div className="w-10 h-10 flex items-center justify-center rounded-full bg-green-700 text-white font-semibold flex-shrink-0 mx-5">
