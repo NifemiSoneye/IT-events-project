@@ -5,7 +5,7 @@ const About = () => {
   const groupImg = new URL("./assets/group.png", import.meta.url).href;
   const talkImg = new URL("./assets/talk.png", import.meta.url).href;
   const variants: Variants = {
-    hidden: { opacity: 0, x: 50 }, // start off invisible & below
+    hidden: { opacity: 0, x: -50 }, // start off invisible & below
     visible: {
       opacity: 1,
       x: 0,
@@ -18,7 +18,7 @@ const About = () => {
     amount: 0.2,
   });
   return (
-    <section className="min-h-screen bg-[#202020] px-[1rem] text-white py-1">
+    <section className="min-h-screen bg-[#202020] px-[1rem] text-white py-3">
       <motion.div
         ref={ref}
         variants={variants}

@@ -3,4 +3,5 @@ export interface Attendee {
   username: string;
   email: string;
   phoneNumber: string;
+  createdAt: string;
 }

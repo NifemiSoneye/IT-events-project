@@ -2,29 +2,13 @@ import { type Attendee } from "./types";
 interface attendeeProps {
   attendees: Attendee[];
 }
+import { Link } from "react-router-dom";
+import { getInitials } from "./utils";
 
 const Attendees = ({ attendees }: attendeeProps) => {
   const maskEmail = (email: string) => {
     const [local, domain] = email.split("@");
     return `${local.slice(0, 3)}***@${domain}`;
-  };
-  const getInitials = (fullName: string): string => {
-    // Trim leading/trailing spaces and split the string by one or more spaces
-    const namesArray = fullName.trim().split(/\s+/);
-
-    if (namesArray.length === 0) {
-      return "";
-    }
-
-    // Get the first initial
-    let initials = namesArray[0].charAt(0).toUpperCase();
-
-    // If there is more than one name, get the last initial
-    if (namesArray.length > 1) {
-      initials += namesArray[namesArray.length - 1].charAt(0).toUpperCase();
-    }
-
-    return initials;
   };
   return (
     <div className="bg-[#303030] mt-[2rem] p-[1rem]">
@@ -53,6 +37,9 @@ const Attendees = ({ attendees }: attendeeProps) => {
       ) : (
         <p className="font-semibold text-md mt-5">Be the first to register!!</p>
       )}
+      <Link to="/admin" className="text-gray-400 font-semibold hover:underline">
+        Admin Page
+      </Link>
     </div>
   );
 };

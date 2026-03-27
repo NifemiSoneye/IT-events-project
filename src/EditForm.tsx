@@ -1,14 +1,13 @@
-import { useState } from "react";
 import { type Attendee } from "./types";
-import Attendees from "./Attendees";
+import { useParams } from "react-router-dom";
 import { motion, useInView, type Variants } from "framer-motion";
 import { useRef } from "react";
-interface userProps {
+
+interface ListProps {
   attendees: Attendee[];
-  handleRegister: (formData: Omit<Attendee, "id" | "createdAt">) => void;
 }
 
-const UserForm = ({ attendees, handleRegister }: userProps) => {
+const EditForm = ({ attendees }: ListProps) => {
   const variants: Variants = {
     hidden: { opacity: 0, y: 50 }, // start off invisible & below
     visible: {
@@ -25,23 +24,12 @@ const UserForm = ({ attendees, handleRegister }: userProps) => {
   const USERNAME_REGEX = /^[A-Za-z]{3,}(\s[A-Za-z]{2,})*$/;
   const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const PHONE_REGEX = /^(?:\+234|0)[789][01]\d{8}$/;
-  const [formData, setFormData] = useState<Omit<Attendee, "id" | "createdAt">>({
-    username: "",
-    phoneNumber: "",
-    email: "",
-  });
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    handleRegister(formData);
-    setFormData({
-      username: "",
-      email: "",
-      phoneNumber: "",
-    });
-  };
-  const validUsername = USERNAME_REGEX.test(formData.username);
-  const validEmail = EMAIL_REGEX.test(formData.email);
-  const validPhoneNumber = PHONE_REGEX.test(formData.phoneNumber);
+  const { id } = useParams();
+  const attendee = attendees.find((a) => a.id === Number(id));
+  if (!attendee) return <p>Attendee not found</p>;
+  const validUsername = USERNAME_REGEX.test(attendee.username);
+  const validEmail = EMAIL_REGEX.test(attendee.email);
+  const validPhoneNumber = PHONE_REGEX.test(attendee.phoneNumber);
   let canSubmit;
 
   if (validUsername && validPhoneNumber && validEmail) {
@@ -183,10 +171,9 @@ const UserForm = ({ attendees, handleRegister }: userProps) => {
             </button>
           </form>
         </div>
-        <Attendees attendees={attendees} />
       </motion.div>
     </div>
   );
 };
 
-export default UserForm;
+export default EditForm;

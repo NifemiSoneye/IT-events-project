@@ -30,14 +30,7 @@ const UserPage = ({ attendees, handleRegister }: userProps) => {
           href=""
           className="bg-green-700 flex items-center justify-center text-[1.5rem] border border-transparent rounded-3xl p-[0.5rem] mb-[1rem]"
         >
-          Register Now{" "}
-          <span>
-            <img
-              src={arrowIcon}
-              alt="arrow"
-              className="h-[30px] w-[30px] pt-[0.25rem] "
-            />
-          </span>
+          Register Now
         </a>
         <a
           href=""
