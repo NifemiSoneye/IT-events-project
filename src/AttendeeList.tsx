@@ -18,7 +18,7 @@ const AttendeeList = ({ attendee, handleDelete }: ListProps) => {
   };
 
   return (
-    <div className="bg-[#2e2e2e] border border-[#3f3f3f] rounded-xl p-4 my-3 w-full">
+    <div className="bg-[#2e2e2e] border border-[#3f3f3f] rounded-xl p-4 my-3 w-full ">
       {/* Top row: Avatar + Name/Email + Status */}
       <div className="flex items-center justify-between gap-3 mb-4">
         <div className="flex items-center gap-3 min-w-0">

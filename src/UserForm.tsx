@@ -50,145 +50,148 @@ const UserForm = ({ attendees, handleRegister }: userProps) => {
     canSubmit = false;
   }
   return (
-    <div
-      className="min-h-screen py-[1rem]  bg-[#303030] text-white "
-      id="register"
-    >
-      <motion.div
-        ref={ref}
-        variants={variants}
-        initial="hidden"
-        animate={isInView ? "visible" : "hidden"}
-      >
-        <div className="px-[1rem] lg:flex lg:justify-center lg:flex-col lg:items-center">
-          <h1 className="text-center text-3xl font-bold">Register</h1>
-          <p className="font-semibold text-xl my-[1rem]">
-            Secure your spot here :
-          </p>
-          <form
-            onSubmit={handleSubmit}
-            className="bg-[#515151] p-[1rem] border border-transparent rounded-xl lg:w-[40vw]"
+    <>
+      <div className="bg-[#303030]">
+        <motion.div
+          ref={ref}
+          variants={variants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+        >
+          <div
+            className="px-[1rem] lg:flex lg:justify-center lg:flex-col lg:items-center py-[1rem]  bg-[#303030] text-white min-h-fit 
+          "
+            id="register"
           >
-            <div className="flex flex-col mb-[1rem]">
-              <div className="flex justify-between">
-                <label
-                  htmlFor="full name"
-                  className="text-white text-xl font-semibold"
-                >
-                  Full name
-                </label>
-                <p
-                  className={
-                    !validUsername && formData.username.length > 0
-                      ? "text-red-500 text-md font-semibold"
-                      : "hidden"
-                  }
-                >
-                  Enter a valid name
-                </p>
-              </div>
-              <input
-                type="text"
-                required
-                placeholder="Your name"
-                className={`bg-gray-200 p-[0.5rem] rounded-lg border outline-none focus:outline-none text-black font-semibold ${
-                  !validUsername && formData.username.length > 0
-                    ? "border-red-600 focus:border-red-600"
-                    : formData.username.length === 0
-                      ? "border-transparent"
-                      : "border-green-500"
-                }`}
-                value={formData.username}
-                onChange={(e) =>
-                  setFormData({ ...formData, username: e.target.value })
-                }
-              />
-            </div>
-            <div className="flex flex-col mb-[1rem]">
-              <div className="flex justify-between">
-                <label
-                  htmlFor="full name"
-                  className="text-white text-xl font-semibold"
-                >
-                  Email Address
-                </label>
-                <p
-                  className={
-                    !validEmail && formData.email.length > 0
-                      ? "text-red-500 text-md font-semibold"
-                      : "hidden"
-                  }
-                >
-                  Enter a valid Email
-                </p>
-              </div>
-              <input
-                type="text"
-                required
-                placeholder="you@gmail.com"
-                className={`bg-gray-200 p-[0.5rem] rounded-lg border outline-none focus:outline-none text-black font-semibold ${
-                  !validEmail && formData.email.length > 0
-                    ? "border-red-600 focus:border-red-600"
-                    : formData.email.length === 0
-                      ? "border-transparent"
-                      : "border-green-500"
-                }`}
-                value={formData.email}
-                onChange={(e) =>
-                  setFormData({ ...formData, email: e.target.value })
-                }
-              />
-            </div>
-            <div className="flex flex-col mb-[1rem]">
-              <div className="flex justify-between">
-                <label
-                  htmlFor="full name"
-                  className="text-white text-xl font-semibold"
-                >
-                  Phone Number
-                </label>
-                <p
-                  className={
-                    !validPhoneNumber && formData.phoneNumber.length > 0
-                      ? "text-red-500 text-md font-semibold text-nowrap"
-                      : "hidden"
-                  }
-                >
-                  Invalid Phone Number
-                </p>
-              </div>
-              <input
-                type="text"
-                required
-                placeholder="+234"
-                className={`bg-gray-200 p-[0.5rem] rounded-lg border outline-none focus:outline-none text-black font-semibold ${
-                  !validPhoneNumber && formData.phoneNumber.length > 0
-                    ? "border-red-600 focus:border-red-600"
-                    : formData.phoneNumber.length === 0
-                      ? "border-transparent"
-                      : "border-green-500"
-                }`}
-                value={formData.phoneNumber}
-                onChange={(e) =>
-                  setFormData({ ...formData, phoneNumber: e.target.value })
-                }
-              />
-            </div>
-            <button
-              className={
-                canSubmit
-                  ? "bg-green-500 flex items-center justify-center text-[1.5rem] border border-transparent rounded-3xl p-[0.5rem] mb-[1rem] w-[100%]"
-                  : "bg-green-300 flex items-center justify-center text-[1.5rem] border border-transparent rounded-3xl p-[0.5rem] mb-[1rem] w-[100%]"
-              }
-              disabled={!canSubmit}
+            <h1 className="text-center text-3xl font-bold">Register</h1>
+            <p className="font-semibold text-xl my-[1rem]">
+              Secure your spot here :
+            </p>
+            <form
+              onSubmit={handleSubmit}
+              className="bg-[#515151] p-[1rem] border border-transparent rounded-xl lg:w-[30vw]"
             >
-              Register Now
-            </button>
-          </form>
-        </div>
-        <Attendees attendees={attendees} />
-      </motion.div>
-    </div>
+              <div className="flex flex-col mb-[1rem]">
+                <div className="flex justify-between">
+                  <label
+                    htmlFor="full name"
+                    className="text-white text-xl font-semibold"
+                  >
+                    Full name
+                  </label>
+                  <p
+                    className={
+                      !validUsername && formData.username.length > 0
+                        ? "text-red-500 text-md font-semibold"
+                        : "hidden"
+                    }
+                  >
+                    Enter a valid name
+                  </p>
+                </div>
+                <input
+                  type="text"
+                  required
+                  placeholder="Your name"
+                  className={`bg-gray-200 p-[0.5rem] rounded-lg border outline-none focus:outline-none text-black font-semibold ${
+                    !validUsername && formData.username.length > 0
+                      ? "border-red-600 focus:border-red-600"
+                      : formData.username.length === 0
+                        ? "border-transparent"
+                        : "border-green-500"
+                  }`}
+                  value={formData.username}
+                  onChange={(e) =>
+                    setFormData({ ...formData, username: e.target.value })
+                  }
+                />
+              </div>
+              <div className="flex flex-col mb-[1rem]">
+                <div className="flex justify-between">
+                  <label
+                    htmlFor="full name"
+                    className="text-white text-xl font-semibold"
+                  >
+                    Email Address
+                  </label>
+                  <p
+                    className={
+                      !validEmail && formData.email.length > 0
+                        ? "text-red-500 text-md font-semibold"
+                        : "hidden"
+                    }
+                  >
+                    Enter a valid Email
+                  </p>
+                </div>
+                <input
+                  type="text"
+                  required
+                  placeholder="you@gmail.com"
+                  className={`bg-gray-200 p-[0.5rem] rounded-lg border outline-none focus:outline-none text-black font-semibold ${
+                    !validEmail && formData.email.length > 0
+                      ? "border-red-600 focus:border-red-600"
+                      : formData.email.length === 0
+                        ? "border-transparent"
+                        : "border-green-500"
+                  }`}
+                  value={formData.email}
+                  onChange={(e) =>
+                    setFormData({ ...formData, email: e.target.value })
+                  }
+                />
+              </div>
+              <div className="flex flex-col mb-[1rem]">
+                <div className="flex justify-between">
+                  <label
+                    htmlFor="full name"
+                    className="text-white text-xl font-semibold"
+                  >
+                    Phone Number
+                  </label>
+                  <p
+                    className={
+                      !validPhoneNumber && formData.phoneNumber.length > 0
+                        ? "text-red-500 text-md font-semibold text-nowrap"
+                        : "hidden"
+                    }
+                  >
+                    Invalid Phone Number
+                  </p>
+                </div>
+                <input
+                  type="text"
+                  required
+                  placeholder="+234"
+                  className={`bg-gray-200 p-[0.5rem] rounded-lg border outline-none focus:outline-none text-black font-semibold ${
+                    !validPhoneNumber && formData.phoneNumber.length > 0
+                      ? "border-red-600 focus:border-red-600"
+                      : formData.phoneNumber.length === 0
+                        ? "border-transparent"
+                        : "border-green-500"
+                  }`}
+                  value={formData.phoneNumber}
+                  onChange={(e) =>
+                    setFormData({ ...formData, phoneNumber: e.target.value })
+                  }
+                />
+              </div>
+              <button
+                className={
+                  canSubmit
+                    ? "bg-green-500 flex items-center justify-center text-[1.5rem] border border-transparent rounded-3xl p-[0.5rem] mb-[1rem] w-[100%]"
+                    : "bg-green-300 flex items-center justify-center text-[1.5rem] border border-transparent rounded-3xl p-[0.5rem] mb-[1rem] w-[100%]"
+                }
+                disabled={!canSubmit}
+              >
+                Register Now
+              </button>
+            </form>
+          </div>
+          <Attendees attendees={attendees} />
+        </motion.div>
+      </div>
+    </>
   );
 };
 

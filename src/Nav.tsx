@@ -1,4 +1,5 @@
 import { Link } from "react-scroll";
+import { Link as RouterLink } from "react-router-dom";
 
 const Nav = () => {
   const menuIcon = new URL("./assets/icon-hamburger.svg", import.meta.url).href;
@@ -33,6 +34,12 @@ const Nav = () => {
         >
           Attendees
         </Link>
+        <RouterLink
+          to="/admin"
+          className="text-white px-2 hover:underline hover:cursor-pointer"
+        >
+          Admin
+        </RouterLink>
       </div>
       <img src={menuIcon} alt="hamburger icon" className="lg:hidden" />
     </div>
