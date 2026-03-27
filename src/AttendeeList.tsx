@@ -71,7 +71,7 @@ const AttendeeList = ({ attendee, handleDelete }: ListProps) => {
       {/* Action buttons */}
       <div className="flex gap-2">
         <Link
-          to={`/${attendee.id}`}
+          to={`/admin/${attendee.id}`}
           className="flex-1 py-1.5 text-sm rounded-lg border border-[#4a4a4a] text-gray-300 hover:bg-[#3a3a3a] hover:text-white transition-colors justify-center flex"
         >
           Edit

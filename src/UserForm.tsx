@@ -50,21 +50,24 @@ const UserForm = ({ attendees, handleRegister }: userProps) => {
     canSubmit = false;
   }
   return (
-    <div className="min-h-screen py-[1rem]  bg-[#303030] text-white ">
+    <div
+      className="min-h-screen py-[1rem]  bg-[#303030] text-white "
+      id="register"
+    >
       <motion.div
         ref={ref}
         variants={variants}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
       >
-        <div className="px-[1rem]">
+        <div className="px-[1rem] lg:flex lg:justify-center lg:flex-col lg:items-center">
           <h1 className="text-center text-3xl font-bold">Register</h1>
           <p className="font-semibold text-xl my-[1rem]">
             Secure your spot here :
           </p>
           <form
             onSubmit={handleSubmit}
-            className="bg-[#515151] p-[1rem] border border-transparent rounded-xl"
+            className="bg-[#515151] p-[1rem] border border-transparent rounded-xl lg:w-[40vw]"
           >
             <div className="flex flex-col mb-[1rem]">
               <div className="flex justify-between">

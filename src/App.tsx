@@ -5,6 +5,7 @@ import AdminPage from "./AdminPage";
 import { type Attendee } from "./types";
 import useLocalStorage from "./hook/useLocalStorage";
 import EditForm from "./EditForm";
+import AdminLayout from "./AdminLayout";
 function App() {
   const [attendees, setAttendees] = useLocalStorage<Attendee[]>(
     "attendees",
@@ -15,6 +16,14 @@ function App() {
       ...prev,
       { id: Date.now(), createdAt: new Date().toISOString(), ...formData },
     ]);
+  };
+  const handleEdit = (
+    id: string,
+    formData: Omit<Attendee, "id" | "createdAt">,
+  ) => {
+    setAttendees((prev) =>
+      prev.map((a) => (a.id === Number(id) ? { ...a, ...formData } : a)),
+    );
   };
   const handleDelete = (id: number) => {
     setAttendees((prev) => prev.filter((a) => a.id !== id));
@@ -28,17 +37,17 @@ function App() {
             <UserPage attendees={attendees} handleRegister={handleRegister} />
           }
         />
+      </Route>
+      <Route path="admin" element={<AdminLayout />}>
         <Route
-          path="admin"
+          index
           element={
             <AdminPage attendees={attendees} handleDelete={handleDelete} />
           }
         />
         <Route
           path=":id"
-          element={
-            <EditForm attendees={attendees} />
-          }
+          element={<EditForm attendees={attendees} handleEdit={handleEdit} />}
         />
       </Route>
     </Routes>

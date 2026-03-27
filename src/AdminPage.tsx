@@ -1,6 +1,7 @@
 import { type Attendee } from "./types";
 import AttendeeList from "./AttendeeList";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 interface adminProps {
   attendees: Attendee[];
@@ -44,7 +45,7 @@ const AdminPage = ({ attendees, handleDelete }: adminProps) => {
     setSearchResults(finalResults);
   }, [search, attendees]);
   return (
-    <div className="min-h-screen pt-[3rem] bg-[#121212] px-[1rem] text-white">
+    <div className="min-h-screen pt-[3rem] bg-[#121212] px-[1rem] text-white pb-[3rem]">
       <h1 className="font-bold text-2xl">Manage attendees</h1>
       <p className="text-green-700 py-[1rem] text-[1rem] font-semibold">
         Lagos Island , Lagos . April 28th 2026
@@ -72,6 +73,7 @@ const AdminPage = ({ attendees, handleDelete }: adminProps) => {
             {registeredToday}
           </p>
           <p className="">
+            Last :{" "}
             {latestAttendee
               ? getTimeAgo(latestAttendee.createdAt)
               : "No registrations yet"}
@@ -96,6 +98,9 @@ const AdminPage = ({ attendees, handleDelete }: adminProps) => {
             ))
           : "No Attendee found"}
       </div>
+      <Link to="/" className="text-gray-400 font-semibold hover:underline">
+        Home Page
+      </Link>
     </div>
   );
 };

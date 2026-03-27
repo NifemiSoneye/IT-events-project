@@ -11,7 +11,7 @@ const Attendees = ({ attendees }: attendeeProps) => {
     return `${local.slice(0, 3)}***@${domain}`;
   };
   return (
-    <div className="bg-[#303030] mt-[2rem] p-[1rem]">
+    <div className="bg-[#303030] mt-[2rem] p-[1rem]" id="attendees">
       <h1 className="text-center font-bold text-3xl">Attendees</h1>
       <p className="font-semibold text-xl">Wanna Know Who else is coming?</p>
       <p className="font-semibold text-xl">

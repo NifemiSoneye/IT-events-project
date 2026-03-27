@@ -2,12 +2,18 @@ import { type Attendee } from "./types";
 import { useParams } from "react-router-dom";
 import { motion, useInView, type Variants } from "framer-motion";
 import { useRef } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-interface ListProps {
+interface EditProps {
   attendees: Attendee[];
+  handleEdit: (
+    id: string,
+    formData: Omit<Attendee, "id" | "createdAt">,
+  ) => void;
 }
 
-const EditForm = ({ attendees }: ListProps) => {
+const EditForm = ({ attendees, handleEdit }: EditProps) => {
   const variants: Variants = {
     hidden: { opacity: 0, y: 50 }, // start off invisible & below
     visible: {
@@ -27,9 +33,14 @@ const EditForm = ({ attendees }: ListProps) => {
   const { id } = useParams();
   const attendee = attendees.find((a) => a.id === Number(id));
   if (!attendee) return <p>Attendee not found</p>;
-  const validUsername = USERNAME_REGEX.test(attendee.username);
-  const validEmail = EMAIL_REGEX.test(attendee.email);
-  const validPhoneNumber = PHONE_REGEX.test(attendee.phoneNumber);
+  const [formData, setFormData] = useState<Omit<Attendee, "id" | "createdAt">>({
+    username: attendee.username,
+    phoneNumber: attendee.phoneNumber,
+    email: attendee.email,
+  });
+  const validUsername = USERNAME_REGEX.test(formData.username);
+  const validEmail = EMAIL_REGEX.test(formData.email);
+  const validPhoneNumber = PHONE_REGEX.test(formData.phoneNumber);
   let canSubmit;
 
   if (validUsername && validPhoneNumber && validEmail) {
@@ -37,6 +48,19 @@ const EditForm = ({ attendees }: ListProps) => {
   } else {
     canSubmit = false;
   }
+
+  const navigate = useNavigate();
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!id) return;
+    handleEdit(id, formData);
+    setFormData({
+      username: "",
+      email: "",
+      phoneNumber: "",
+    });
+    navigate("/admin");
+  };
   return (
     <div className="min-h-screen py-[1rem]  bg-[#303030] text-white ">
       <motion.div
@@ -46,9 +70,9 @@ const EditForm = ({ attendees }: ListProps) => {
         animate={isInView ? "visible" : "hidden"}
       >
         <div className="px-[1rem]">
-          <h1 className="text-center text-3xl font-bold">Register</h1>
+          <h1 className="text-center text-3xl font-bold">Edit attendee</h1>
           <p className="font-semibold text-xl my-[1rem]">
-            Secure your spot here :
+            Edit selected attendee :
           </p>
           <form
             onSubmit={handleSubmit}
@@ -167,7 +191,7 @@ const EditForm = ({ attendees }: ListProps) => {
               }
               disabled={!canSubmit}
             >
-              Register Now
+              Edit Attendee
             </button>
           </form>
         </div>
