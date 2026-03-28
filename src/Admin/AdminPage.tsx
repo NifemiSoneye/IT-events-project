@@ -60,7 +60,7 @@ const AdminPage = ({ attendees, handleDelete }: adminProps) => {
         </div>
 
         <div className="bg-[#303030] py-4 pl-4 border border-transparent rounded-xl">
-          <p className="text-gray-400 text-lg">Spots Length</p>
+          <p className="text-gray-400 text-lg">Spots Left</p>
           <p className="font-semibold text-2xl text-green-500">
             {100 - attendees.length}
           </p>
