@@ -2,8 +2,8 @@ import { motion, useInView, type Variants } from "framer-motion";
 import { useRef } from "react";
 
 const About = () => {
-  const groupImg = new URL("./assets/group.png", import.meta.url).href;
-  const talkImg = new URL("./assets/talk.png", import.meta.url).href;
+  const groupImg = new URL("../assets/group.png", import.meta.url).href;
+  const talkImg = new URL("../assets/talk.png", import.meta.url).href;
   const variants: Variants = {
     hidden: { opacity: 0, x: -50 }, // start off invisible & below
     visible: {

@@ -1,5 +1,5 @@
 import UserForm from "./UserForm";
-import { type Attendee } from "./types";
+import { type Attendee } from "../types";
 import About from "./About";
 import { motion } from "framer-motion";
 import { Link } from "react-scroll";
@@ -9,7 +9,7 @@ interface userProps {
 }
 const UserPage = ({ attendees, handleRegister }: userProps) => {
   const name: string[] = "Tech Meetup 2026".split("");
-  const heroImg = new URL("./assets/hero-image.jpg", import.meta.url).href;
+  const heroImg = new URL("../assets/hero-image.jpg", import.meta.url).href;
 
   return (
     <div className=" min-h-screen ">

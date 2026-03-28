@@ -1,5 +1,5 @@
-import { type Attendee } from "./types";
-import { getInitials } from "./utils";
+import { type Attendee } from "../types";
+import { getInitials } from "../utils";
 import { Link } from "react-router-dom";
 
 interface ListProps {

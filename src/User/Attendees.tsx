@@ -1,9 +1,9 @@
-import { type Attendee } from "./types";
+import { type Attendee } from "../types";
 interface attendeeProps {
   attendees: Attendee[];
 }
 import { Link } from "react-router-dom";
-import { getInitials } from "./utils";
+import { getInitials } from "../utils";
 
 const Attendees = ({ attendees }: attendeeProps) => {
   const maskEmail = (email: string) => {

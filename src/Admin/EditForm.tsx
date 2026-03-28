@@ -1,4 +1,4 @@
-import { type Attendee } from "./types";
+import { type Attendee } from "../types";
 import { useParams } from "react-router-dom";
 import { motion, useInView, type Variants } from "framer-motion";
 import { useRef } from "react";

@@ -1,5 +1,3 @@
-import React from "react";
-
 const AdminNav = () => {
   return (
     <div className="bg-black flex justify-between min-h-[10vh] items-center px-[1rem] ">

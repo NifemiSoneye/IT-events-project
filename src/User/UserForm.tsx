@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { type Attendee } from "./types";
+import { type Attendee } from "../types";
 import Attendees from "./Attendees";
 import { motion, useInView, type Variants } from "framer-motion";
 import { useRef } from "react";

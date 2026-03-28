@@ -1,12 +1,12 @@
 import { Routes, Route } from "react-router-dom";
 import Layout from "./Layout";
-import UserPage from "./UserPage";
-import AdminPage from "./AdminPage";
+import UserPage from "./User/UserPage";
+import AdminPage from "./Admin/AdminPage";
 import { type Attendee } from "./types";
 import useLocalStorage from "./hook/useLocalStorage";
-import EditForm from "./EditForm";
-import AdminLayout from "./AdminLayout";
-import ScrollToTop from "./scrollToTop";
+import EditForm from "./Admin/EditForm";
+import AdminLayout from "./Admin/AdminLayout";
+import ScrollToTop from "./ScrollToTop";
 function App() {
   const [attendees, setAttendees] = useLocalStorage<Attendee[]>(
     "attendees",

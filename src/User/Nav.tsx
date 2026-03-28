@@ -3,9 +3,10 @@ import { Link as RouterLink } from "react-router-dom";
 import { useState } from "react";
 
 const Nav = () => {
-  const menuIcon = new URL("./assets/icon-hamburger.svg", import.meta.url).href;
+  const menuIcon = new URL("../assets/icon-hamburger.svg", import.meta.url)
+    .href;
   const [mobileNav, setMobileNav] = useState(false);
-  const closeIcon = new URL("./assets/icon-close.svg", import.meta.url).href;
+  const closeIcon = new URL("../assets/icon-close.svg", import.meta.url).href;
   const navLinks = ["about", "register"];
   const mobileLinkBase =
     "relative pb-2 text-white text-2xl py-4 px-6 hover:text-green-400 border-b border-gray-600";

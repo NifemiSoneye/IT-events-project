@@ -1,4 +1,4 @@
-import { type Attendee } from "./types";
+import { type Attendee } from "../types";
 import AttendeeList from "./AttendeeList";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
