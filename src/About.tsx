@@ -33,11 +33,11 @@ const About = () => {
           <h1 className="text-center text-[2rem] font-semibold lg:text-left lg:text-[3rem]">
             ABOUT THE EVENT
           </h1>
-          <div className="flex flex-col items-center my-[1rem] lg:hidden">
+          <div className="flex flex-col items-center my-[1rem] lg:hidden md:flex-row md:items-center md:justify-around">
             <img
               src={groupImg}
               alt="group"
-              className="h-[200px] w-[300px] mb-[1rem] border border-black rounded-md"
+              className="h-[200px] w-[300px] mb-[1rem] border border-black rounded-md md:mb-0"
             />
             <img
               src={talkImg}

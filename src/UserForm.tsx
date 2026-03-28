@@ -59,7 +59,7 @@ const UserForm = ({ attendees, handleRegister }: userProps) => {
           animate={isInView ? "visible" : "hidden"}
         >
           <div
-            className="px-[1rem] lg:flex lg:justify-center lg:flex-col lg:items-center py-[1rem]  bg-[#303030] text-white min-h-fit 
+            className="px-[1rem] flex justify-center flex-col items-center py-[1rem]  bg-[#303030] text-white min-h-fit 
           "
             id="register"
           >
@@ -69,7 +69,7 @@ const UserForm = ({ attendees, handleRegister }: userProps) => {
             </p>
             <form
               onSubmit={handleSubmit}
-              className="bg-[#515151] p-[1rem] border border-transparent rounded-xl lg:w-[30vw]"
+              className="bg-[#515151] p-[1rem] border border-transparent rounded-xl lg:w-[30vw] md:w-[70vw] w-full"
             >
               <div className="flex flex-col mb-[1rem]">
                 <div className="flex justify-between">

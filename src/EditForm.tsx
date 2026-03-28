@@ -69,14 +69,14 @@ const EditForm = ({ attendees, handleEdit }: EditProps) => {
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
       >
-        <div className="px-[1rem]">
+        <div className="px-[1rem] flex justify-center items-center flex-col">
           <h1 className="text-center text-3xl font-bold">Edit attendee</h1>
           <p className="font-semibold text-xl my-[1rem]">
             Edit selected attendee :
           </p>
           <form
             onSubmit={handleSubmit}
-            className="bg-[#515151] p-[1rem] border border-transparent rounded-xl"
+            className="bg-[#515151] p-[1rem] border border-transparent rounded-xl lg:w-[35vw] w-full md:w-[70vw]"
           >
             <div className="flex flex-col mb-[1rem]">
               <div className="flex justify-between">

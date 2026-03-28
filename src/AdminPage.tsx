@@ -50,44 +50,45 @@ const AdminPage = ({ attendees, handleDelete }: adminProps) => {
       <p className="text-green-700 py-[1rem] text-[1rem] font-semibold">
         Lagos Island , Lagos . April 28th 2026
       </p>
-      <div>
-        <div className="flex justify-between">
-          <div className="bg-[#303030] py-4 pl-4 min-w-[35vw] border border-transparent rounded-xl">
-            <p className="text-gray-400 text-lg">Registered</p>
-            <p className="font-semibold text-2xl text-green-500">
-              {attendees.length}
-            </p>
-            <p>Total</p>
-          </div>
-          <div className="bg-[#303030] pr-10 py-4 pl-4 min-w-[35vw] border border-transparent rounded-xl">
-            <p className="text-gray-400 text-lg">Spots Length</p>
-            <p className="font-semibold text-2xl text-green-500">
-              {100 - attendees.length}
-            </p>
-            <p>of 100</p>
-          </div>
+      <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
+        <div className="bg-[#303030] py-4 pl-4 border border-transparent rounded-xl">
+          <p className="text-gray-400 text-lg">Registered</p>
+          <p className="font-semibold text-2xl text-green-500">
+            {attendees.length}
+          </p>
+          <p>Total</p>
         </div>
-        <div className="bg-[#303030] pr-10 py-4 pl-4 min-w-[35vw] border border-transparent rounded-xl my-5">
+
+        <div className="bg-[#303030] py-4 pl-4 border border-transparent rounded-xl">
+          <p className="text-gray-400 text-lg">Spots Length</p>
+          <p className="font-semibold text-2xl text-green-500">
+            {100 - attendees.length}
+          </p>
+          <p>of 100</p>
+        </div>
+
+        <div className="bg-[#303030] py-4 pl-4 pr-4 border border-transparent rounded-xl col-span-2 lg:col-span-1">
           <p className="text-gray-400 text-lg">Registered today</p>
           <p className="font-semibold text-2xl text-green-500">
             {registeredToday}
           </p>
-          <p className="">
-            Last :{" "}
+          <p>
+            Last:{" "}
             {latestAttendee
               ? getTimeAgo(latestAttendee.createdAt)
               : "No registrations yet"}
           </p>
         </div>
       </div>
+
       <input
         type="text"
-        className="bg-[#303030] w-[90vw]  text-white p-[1rem] pl-[5rem] lg:w-[30vw] rounded-md light:bg-white shadow-md light:text-[#808080ff]"
+        className="bg-[#303030] w-full text-white p-[1rem] pl-[5rem] lg:w-[35vw] rounded-md light:bg-white shadow-md light:text-[#808080ff]"
         placeholder="Search for an attendee..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
-      <div className="mt-2">
+      <div className="mt-2 lg:grid lg:grid-cols-3 lg:gap-4">
         {searchResults.length > 0
           ? searchResults.map((attendee) => (
               <AttendeeList

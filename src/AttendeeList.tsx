@@ -19,15 +19,11 @@ const AttendeeList = ({ attendee, handleDelete }: ListProps) => {
 
   return (
     <div className="bg-[#2e2e2e] border border-[#3f3f3f] rounded-xl p-4 my-3 w-full ">
-      {/* Top row: Avatar + Name/Email + Status */}
       <div className="flex items-center justify-between gap-3 mb-4">
         <div className="flex items-center gap-3 min-w-0">
-          {/* Avatar */}
           <div className="w-10 h-10 flex-shrink-0 flex items-center justify-center rounded-full bg-green-700 text-white text-sm font-bold">
             {getInitials(attendee.username)}
           </div>
-
-          {/* Name + Email */}
           <div className="min-w-0">
             <p className="text-white font-semibold text-sm truncate max-w-[180px]">
               {attendee.username}
@@ -37,18 +33,14 @@ const AttendeeList = ({ attendee, handleDelete }: ListProps) => {
             </p>
           </div>
         </div>
-
-        {/* Status badge */}
         <span className="flex-shrink-0 inline-flex items-center gap-1.5 bg-green-900/40 text-green-400 text-xs font-medium px-2.5 py-1 rounded-full border border-green-700/40">
           <span className="w-1.5 h-1.5 rounded-full bg-green-400 inline-block" />
           Registered
         </span>
       </div>
 
-      {/* Divider */}
       <div className="border-t border-[#3f3f3f] mb-4" />
 
-      {/* Meta info row */}
       <div className="grid grid-cols-2 gap-3 mb-4">
         <div>
           <p className="text-[10px] uppercase tracking-widest text-gray-500 mb-0.5">
@@ -67,8 +59,6 @@ const AttendeeList = ({ attendee, handleDelete }: ListProps) => {
           </p>
         </div>
       </div>
-
-      {/* Action buttons */}
       <div className="flex gap-2">
         <Link
           to={`/admin/${attendee.id}`}

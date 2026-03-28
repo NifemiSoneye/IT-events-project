@@ -6,6 +6,7 @@ import { type Attendee } from "./types";
 import useLocalStorage from "./hook/useLocalStorage";
 import EditForm from "./EditForm";
 import AdminLayout from "./AdminLayout";
+import ScrollToTop from "./scrollToTop";
 function App() {
   const [attendees, setAttendees] = useLocalStorage<Attendee[]>(
     "attendees",
@@ -29,28 +30,31 @@ function App() {
     setAttendees((prev) => prev.filter((a) => a.id !== id));
   };
   return (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route
-          index
-          element={
-            <UserPage attendees={attendees} handleRegister={handleRegister} />
-          }
-        />
-      </Route>
-      <Route path="admin" element={<AdminLayout />}>
-        <Route
-          index
-          element={
-            <AdminPage attendees={attendees} handleDelete={handleDelete} />
-          }
-        />
-        <Route
-          path=":id"
-          element={<EditForm attendees={attendees} handleEdit={handleEdit} />}
-        />
-      </Route>
-    </Routes>
+    <>
+      <ScrollToTop />
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route
+            index
+            element={
+              <UserPage attendees={attendees} handleRegister={handleRegister} />
+            }
+          />
+        </Route>
+        <Route path="admin" element={<AdminLayout />}>
+          <Route
+            index
+            element={
+              <AdminPage attendees={attendees} handleDelete={handleDelete} />
+            }
+          />
+          <Route
+            path=":id"
+            element={<EditForm attendees={attendees} handleEdit={handleEdit} />}
+          />
+        </Route>
+      </Routes>
+    </>
   );
 }
 
