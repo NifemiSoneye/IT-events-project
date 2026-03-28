@@ -39,11 +39,13 @@ const UserPage = ({ attendees, handleRegister }: userProps) => {
             Connect with the sharpest minds in tech both home and abroad.
           </p>
           <p className="text-gray-500 font-bold pb-[1.5rem] lg:pb-3 lg:text-[1.5rem]">
-            A 2 days retreat involving talks and real conversations.
+            A Tech work shop retreat involving educative talkshows and real
+            conversations.
           </p>
           <p className="text-gray-500 font-bold pb-[1.5rem] lg:text-[1.5rem]">
-            Register now to book your place at the best tech meetup of the year
-            . Dont miss out on this incredible opportunity.
+            Register now to book your place among the 100 participants at the
+            best tech meetup of the year . Dont miss out on this incredible
+            opportunity.
           </p>
           <div className="lg:flex lg:items-center lg:mt-auto">
             <Link
