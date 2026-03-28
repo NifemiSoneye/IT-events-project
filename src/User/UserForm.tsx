@@ -7,7 +7,8 @@ interface userProps {
   attendees: Attendee[];
   handleRegister: (formData: Omit<Attendee, "id" | "createdAt">) => void;
 }
-
+const successIcon = new URL("../assets/icon-thank-you.svg", import.meta.url)
+  .href;
 const UserForm = ({ attendees, handleRegister }: userProps) => {
   const variants: Variants = {
     hidden: { opacity: 0, y: 50 }, // start off invisible & below
@@ -30,6 +31,7 @@ const UserForm = ({ attendees, handleRegister }: userProps) => {
     phoneNumber: "",
     email: "",
   });
+  const [success, setSuccess] = useState<boolean>(false);
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     handleRegister(formData);
@@ -38,6 +40,7 @@ const UserForm = ({ attendees, handleRegister }: userProps) => {
       email: "",
       phoneNumber: "",
     });
+    setSuccess(true);
   };
   const validUsername = USERNAME_REGEX.test(formData.username);
   const validEmail = EMAIL_REGEX.test(formData.email);
@@ -86,7 +89,7 @@ const UserForm = ({ attendees, handleRegister }: userProps) => {
                         : "hidden"
                     }
                   >
-                    Enter a valid name
+                    Invalid name
                   </p>
                 </div>
                 <input
@@ -121,7 +124,7 @@ const UserForm = ({ attendees, handleRegister }: userProps) => {
                         : "hidden"
                     }
                   >
-                    Enter a valid Email
+                    Invalid Email
                   </p>
                 </div>
                 <input
@@ -187,6 +190,29 @@ const UserForm = ({ attendees, handleRegister }: userProps) => {
                 Register Now
               </button>
             </form>
+            {success && (
+              <div
+                className="fixed inset-0 z-30 bg-black/50 flex justify-center items-center"
+                onClick={() => setSuccess(false)}
+              >
+                <div
+                  className="bg-[#303030] rounded-xl p-8 flex flex-col items-center gap-4 text-white max-w-sm w-[90vw]"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <img src={successIcon} alt="success" className="h-16 w-16" />
+                  <h2 className="text-2xl font-bold">You're registered!</h2>
+                  <p className="text-gray-400 text-center">
+                    See you at the meetup 🎉
+                  </p>
+                  <button
+                    onClick={() => setSuccess(false)}
+                    className="bg-green-600 px-6 py-2 rounded-3xl font-semibold hover:bg-green-700 w-full"
+                  >
+                    Done
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
           <Attendees attendees={attendees} />
         </motion.div>

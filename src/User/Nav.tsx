@@ -7,7 +7,7 @@ const Nav = () => {
     .href;
   const [mobileNav, setMobileNav] = useState(false);
   const closeIcon = new URL("../assets/icon-close.svg", import.meta.url).href;
-  const navLinks = ["about", "register"];
+  const navLinks = ["about", "register", "attendees"];
   const mobileLinkBase =
     "relative pb-2 text-white text-2xl py-4 px-6 hover:text-green-400 border-b border-gray-600";
   return (
@@ -51,7 +51,7 @@ const Nav = () => {
       <img
         src={menuIcon}
         alt="hamburger icon"
-        className="lg:hidden"
+        className="lg:hidden cursor-pointer"
         onClick={() => setMobileNav(true)}
       />
       <div
@@ -84,6 +84,12 @@ const Nav = () => {
           Admin
         </RouterLink>
       </div>
+      {mobileNav && (
+        <div
+          className="fixed inset-0 z-30 bg-black/50 lg:hidden"
+          onClick={() => setMobileNav(false)}
+        />
+      )}
     </div>
   );
 };
