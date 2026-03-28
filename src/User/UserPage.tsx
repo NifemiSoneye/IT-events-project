@@ -13,7 +13,7 @@ const UserPage = ({ attendees, handleRegister }: userProps) => {
 
   return (
     <div className=" min-h-screen pt-[10vh] bg-[#121212]">
-      <section className="min-h-screen pt-[3rem]  bg-[#121212] px-[1rem] lg:grid  lg:pb-[20vh] grid-cols-[1.5fr_1fr] lg:px-[1.5rem]">
+      <section className="min-h-screen lg:pt-[3rem]  bg-[#121212] px-[1rem] lg:grid  lg:pb-[20vh] grid-cols-[1.5fr_1fr] lg:px-[1.5rem]">
         <div className="lg:mr-[10vw]">
           <p className="text-green-700 py-[2rem] text-[1rem] font-semibold lg:text-[1.5rem]">
             Lagos Island , Lagos . April 28th 2026
