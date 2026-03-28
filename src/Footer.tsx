@@ -3,7 +3,7 @@ const Footer = () => {
   return (
     <div className="bg-[#111315] p-[1rem] flex-col items-center justify-center flex text-white font-semibold text-sm relative">
       <div className="absolute top-0 left-0 w-full h-1 bg-green-400 opacity-40 blur-md"></div>
-      <p>&copy; 2025 TechMeetup April 28th 2026</p>
+      <p>&copy; 2026 TechMeetup April 28th 2026</p>
       <p>Built with React , Tailwind and Typescript</p>
       <div className="flex justify-center gap-6 mt-6">
         <a
