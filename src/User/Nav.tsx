@@ -11,7 +11,7 @@ const Nav = () => {
   const mobileLinkBase =
     "relative pb-2 text-white text-2xl py-4 px-6 hover:text-green-400 border-b border-gray-600";
   return (
-    <div className="bg-black flex justify-between min-h-[10vh] items-center px-[1rem]  backdrop-blur-md fixed top-0 left-0 w-full  border-b border-gray-600 bg-[#111113]/60 z-50">
+    <div className=" flex justify-between min-h-[10vh] items-center px-[1rem]  backdrop-blur-md fixed top-0 left-0 w-full  border-b border-gray-600 bg-[#111113]/60 z-50">
       <p className="text-green-600 font-semibold">Tech Meetup Event</p>
       <div className="hidden lg:flex">
         <Link
