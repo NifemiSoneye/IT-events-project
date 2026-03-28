@@ -12,7 +12,7 @@ const UserPage = ({ attendees, handleRegister }: userProps) => {
   const heroImg = new URL("../assets/hero-image.jpg", import.meta.url).href;
 
   return (
-    <div className=" min-h-screen ">
+    <div className=" min-h-screen pt-[10vh]">
       <section className="min-h-screen pt-[3rem]  bg-[#121212] px-[1rem] lg:grid  lg:pb-[20vh] grid-cols-[1.5fr_1fr] lg:px-[1.5rem]">
         <div className="lg:mr-[10vw]">
           <p className="text-green-700 py-[2rem] text-[1rem] font-semibold lg:text-[1.5rem]">
@@ -44,7 +44,7 @@ const UserPage = ({ attendees, handleRegister }: userProps) => {
           </p>
           <p className="text-gray-500 font-bold pb-[1.5rem] lg:text-[1.5rem]">
             Register now to book your place among the 100 participants at the
-            best tech meetup of the year . Dont miss out on this incredible
+            best tech meetup of the year. Don't miss out on this incredible
             opportunity.
           </p>
           <div className="lg:flex lg:items-center lg:mt-auto">
