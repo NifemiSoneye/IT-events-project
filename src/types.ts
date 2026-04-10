@@ -1,7 +1,9 @@
 export interface Attendee {
-  id: number;
+  id?: string;
+  _id: string;
   username: string;
   email: string;
   phoneNumber: string;
   createdAt: string;
+  ticket?: number;
 }
