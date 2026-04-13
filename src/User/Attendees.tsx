@@ -48,8 +48,8 @@ const Attendees = ({ attendees }: attendeeProps) => {
           </p>
         )}
       </div>
-      <Link to="/admin" className="text-gray-400 font-semibold hover:underline">
-        Admin Page
+      <Link to="/login" className="text-gray-400 font-semibold hover:underline">
+        Admin Login
       </Link>
     </div>
   );

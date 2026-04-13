@@ -1,5 +1,4 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import { type RootState } from "../../app/store";
 
 interface AuthState {
   token: string | null;
@@ -25,4 +24,5 @@ export const { setCredentials, logOut } = authSlice.actions;
 
 export default authSlice.reducer;
 
-export const selectCurrentToken = (state: RootState) => state.auth.token;
+export const selectCurrentToken = (state: { auth: AuthState }) =>
+  state.auth.token;
