@@ -3,7 +3,7 @@ import { apiSlice } from "../../app/api/apiSlice";
 import { type Attendee } from "../../types";
 import { type RootState } from "../../app/store";
 
-const attendeesAdapter = createEntityAdapter({});
+const attendeesAdapter = createEntityAdapter<Attendee>({});
 
 const initialState = attendeesAdapter.getInitialState();
 

@@ -2,13 +2,11 @@ import { type Attendee } from "../types";
 import { getInitials } from "../utils";
 import { Link } from "react-router-dom";
 
-interface ListProps {
+interface AttendeeListProps {
   attendee: Attendee;
-  handleDelete: (id: number) => void;
-  key: number;
 }
 
-const AttendeeList = ({ attendee, handleDelete }: ListProps) => {
+const AttendeeList = ({ attendee }: AttendeeListProps) => {
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString("en-US", {
       year: "numeric",

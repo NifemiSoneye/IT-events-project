@@ -4,6 +4,7 @@ import { motion, useInView, type Variants } from "framer-motion";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "./authSlice";
 import { useLoginMutation } from "./authApiSlice";
+import { ClipLoader } from "react-spinners";
 
 const Login = () => {
   const variants: Variants = {
@@ -77,7 +78,7 @@ const Login = () => {
   return (
     <div className="min-h-screen pb-[1rem]  bg-[#303030] text-white pt-[10vh]">
       {isLoading ? (
-        <p>Loading...</p>
+        <ClipLoader color={"#FFF"}></ClipLoader>
       ) : (
         <motion.div
           ref={ref}
