@@ -1,15 +1,22 @@
 import { type Attendee } from "../types";
-interface attendeeProps {
-  attendees: Attendee[];
-}
 import { Link } from "react-router-dom";
 import { getInitials } from "../utils";
+import { useSelector } from "react-redux";
+import { selectAllAttendees } from "../features/attendees/attendeesApiSlice";
+import { useGetAttendeeQuery } from "../features/attendees/attendeesApiSlice";
 
-const Attendees = ({ attendees }: attendeeProps) => {
+const Attendees = () => {
   const maskEmail = (email: string) => {
     const [local, domain] = email.split("@");
     return `${local.slice(0, 3)}***@${domain}`;
   };
+  useGetAttendeeQuery(undefined, {
+    pollingInterval: 60000,
+    refetchOnFocus: true,
+    refetchOnMountOrArgChange: true,
+  });
+  const attendees: Attendee[] = useSelector(selectAllAttendees);
+  console.log(attendees);
   return (
     <div
       className="bg-[#1a1a1a] pt-[2rem] p-[1rem] text-white lg:pb-5"
