@@ -1,6 +1,7 @@
 import { type Attendee } from "../types";
 import { getInitials } from "../utils";
 import { Link } from "react-router-dom";
+import { useDeleteAttendeeMutation } from "../features/attendees/attendeesApiSlice";
 
 interface AttendeeListProps {
   attendee: Attendee;
@@ -15,6 +16,14 @@ const AttendeeList = ({ attendee }: AttendeeListProps) => {
     });
   };
 
+  const [
+    deleteAttendee,
+    { isSuccess: isDelSuccess, isError: isDelError, error: delerror },
+  ] = useDeleteAttendeeMutation();
+
+  const onDeleteUserClicked = async () => {
+    await deleteAttendee({ id: attendee.id });
+  };
   return (
     <div className="bg-[#2e2e2e] border border-[#3f3f3f] rounded-xl p-4 my-3 w-full ">
       <div className="flex items-center justify-between gap-3 mb-4">
@@ -65,7 +74,7 @@ const AttendeeList = ({ attendee }: AttendeeListProps) => {
           Edit
         </Link>
         <button
-          onClick={() => handleDelete(attendee.id)}
+          onClick={onDeleteUserClicked}
           className="flex-1 py-1.5 text-sm rounded-lg border border-red-900/50 text-red-400 hover:bg-red-950/40 hover:text-red-300 transition-colors"
         >
           Delete
