@@ -3,11 +3,8 @@ import { type Attendee } from "../types";
 import About from "./About";
 import { motion } from "framer-motion";
 import { Link } from "react-scroll";
-interface userProps {
-  attendees: Attendee[];
-  handleRegister: (formData: Omit<Attendee, "id" | "createdAt">) => void;
-}
-const UserPage = ({ attendees, handleRegister }: userProps) => {
+
+const UserPage = () => {
   const name: string[] = "Tech Meetup 2026".split("");
   const heroImg = new URL("../assets/hero-image.jpg", import.meta.url).href;
 
@@ -81,7 +78,7 @@ const UserPage = ({ attendees, handleRegister }: userProps) => {
         </motion.div>
       </section>
       <About />
-      <UserForm attendees={attendees} handleRegister={handleRegister} />
+      <UserForm />
     </div>
   );
 };

@@ -79,7 +79,7 @@ const Login = () => {
     <div className="min-h-screen pb-[1rem]  bg-[#303030] text-white pt-[10vh]">
       {isLoading ? (
         <div className="grid place-content-center">
-          <ClipLoader color={"#FFF"}></ClipLoader>
+          <ClipLoader color={"#FFF"} />
         </div>
       ) : (
         <motion.div

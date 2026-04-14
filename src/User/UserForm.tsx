@@ -2,14 +2,15 @@ import { useState } from "react";
 import { type Attendee } from "../types";
 import Attendees from "./Attendees";
 import { motion, useInView, type Variants } from "framer-motion";
+import { useCreateAttendeeMutation } from "../features/attendees/attendeesApiSlice";
 import { useRef } from "react";
-interface userProps {
-  attendees: Attendee[];
-  handleRegister: (formData: Omit<Attendee, "id" | "createdAt">) => void;
-}
+import { create } from "framer-motion/m";
+import { ClipLoader } from "react-spinners";
 const successIcon = new URL("../assets/icon-thank-you.svg", import.meta.url)
   .href;
-const UserForm = ({ attendees, handleRegister }: userProps) => {
+const UserForm = () => {
+  const [createAttendee, { isLoading, isSuccess, isError, error }] =
+    useCreateAttendeeMutation();
   const variants: Variants = {
     hidden: { opacity: 0, y: 50 }, // start off invisible & below
     visible: {
@@ -23,28 +24,52 @@ const UserForm = ({ attendees, handleRegister }: userProps) => {
     once: false,
     amount: 0.05,
   });
+  const errRef = useRef<HTMLDivElement>(null);
   const USERNAME_REGEX = /^[A-Za-z]{3,}(\s[A-Za-z]{2,})*$/;
   const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const PHONE_REGEX = /^(?:\+234|0)[789][01]\d{8}$/;
-  const [formData, setFormData] = useState<Omit<Attendee, "id" | "createdAt">>({
-    username: "",
-    phoneNumber: "",
-    email: "",
-  });
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState<boolean>(false);
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    handleRegister(formData);
-    setFormData({
-      username: "",
-      email: "",
-      phoneNumber: "",
-    });
-    setSuccess(true);
+    try {
+      await createAttendee({ username, email, phoneNumber }).unwrap();
+      setUsername("");
+      setEmail("");
+      setPhoneNumber("");
+      setSuccess(true);
+    } catch (err: any) {
+      if (!err.status) {
+        setErrMsg("No Server Response");
+      } else if (err.status === 400) {
+        setErrMsg("Missing Username or Password");
+      } else if (err.status === 401) {
+        setErrMsg("Unauthorized");
+      } else {
+        setErrMsg(err.data?.message);
+      }
+      errRef?.current?.focus();
+    }
   };
-  const validUsername = USERNAME_REGEX.test(formData.username);
-  const validEmail = EMAIL_REGEX.test(formData.email);
-  const validPhoneNumber = PHONE_REGEX.test(formData.phoneNumber);
+  const handleUserInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setErrMsg("");
+    setUsername(e.target.value);
+  };
+
+  const handleEmailInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setErrMsg("");
+    setEmail(e.target.value);
+  };
+  const handlePhoneInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setErrMsg("");
+    setPhoneNumber(e.target.value);
+  };
+  const validUsername = USERNAME_REGEX.test(username);
+  const validEmail = EMAIL_REGEX.test(email);
+  const validPhoneNumber = PHONE_REGEX.test(phoneNumber);
   let canSubmit;
 
   if (validUsername && validPhoneNumber && validEmail) {
@@ -66,6 +91,17 @@ const UserForm = ({ attendees, handleRegister }: userProps) => {
           "
             id="register"
           >
+            <p
+              ref={errRef}
+              className={
+                errMsg
+                  ? "inline-block bg-transparent text-[#b22222] p-1 mb-[0.5em] my-5 font-bold text-2xl"
+                  : "hidden"
+              }
+              aria-live="assertive"
+            >
+              {errMsg}
+            </p>
             <h1 className="text-center text-3xl font-bold">Register</h1>
             <p className="font-semibold text-xl my-[1rem]">
               Secure your spot here :
@@ -84,7 +120,7 @@ const UserForm = ({ attendees, handleRegister }: userProps) => {
                   </label>
                   <p
                     className={
-                      !validUsername && formData.username.length > 0
+                      !validUsername && username.length > 0
                         ? "text-red-500 text-md font-semibold"
                         : "hidden"
                     }
@@ -97,16 +133,14 @@ const UserForm = ({ attendees, handleRegister }: userProps) => {
                   required
                   placeholder="Your name"
                   className={`bg-gray-200 p-[0.5rem] rounded-lg border outline-none focus:outline-none text-black font-semibold ${
-                    !validUsername && formData.username.length > 0
+                    !validUsername && username.length > 0
                       ? "border-red-600 focus:border-red-600"
-                      : formData.username.length === 0
+                      : username.length === 0
                         ? "border-transparent"
                         : "border-green-500"
                   }`}
-                  value={formData.username}
-                  onChange={(e) =>
-                    setFormData({ ...formData, username: e.target.value })
-                  }
+                  value={username}
+                  onChange={handleUserInput}
                 />
               </div>
               <div className="flex flex-col mb-[1rem]">
@@ -119,7 +153,7 @@ const UserForm = ({ attendees, handleRegister }: userProps) => {
                   </label>
                   <p
                     className={
-                      !validEmail && formData.email.length > 0
+                      !validEmail && email.length > 0
                         ? "text-red-500 text-md font-semibold"
                         : "hidden"
                     }
@@ -132,16 +166,14 @@ const UserForm = ({ attendees, handleRegister }: userProps) => {
                   required
                   placeholder="you@gmail.com"
                   className={`bg-gray-200 p-[0.5rem] rounded-lg border outline-none focus:outline-none text-black font-semibold ${
-                    !validEmail && formData.email.length > 0
+                    !validEmail && email.length > 0
                       ? "border-red-600 focus:border-red-600"
-                      : formData.email.length === 0
+                      : email.length === 0
                         ? "border-transparent"
                         : "border-green-500"
                   }`}
-                  value={formData.email}
-                  onChange={(e) =>
-                    setFormData({ ...formData, email: e.target.value })
-                  }
+                  value={email}
+                  onChange={handleEmailInput}
                 />
               </div>
               <div className="flex flex-col mb-[1rem]">
@@ -154,7 +186,7 @@ const UserForm = ({ attendees, handleRegister }: userProps) => {
                   </label>
                   <p
                     className={
-                      !validPhoneNumber && formData.phoneNumber.length > 0
+                      !validPhoneNumber && phoneNumber.length > 0
                         ? "text-red-500 text-md font-semibold text-nowrap"
                         : "hidden"
                     }
@@ -167,16 +199,14 @@ const UserForm = ({ attendees, handleRegister }: userProps) => {
                   required
                   placeholder="+234"
                   className={`bg-gray-200 p-[0.5rem] rounded-lg border outline-none focus:outline-none text-black font-semibold ${
-                    !validPhoneNumber && formData.phoneNumber.length > 0
+                    !validPhoneNumber && phoneNumber.length > 0
                       ? "border-red-600 focus:border-red-600"
-                      : formData.phoneNumber.length === 0
+                      : phoneNumber.length === 0
                         ? "border-transparent"
                         : "border-green-500"
                   }`}
-                  value={formData.phoneNumber}
-                  onChange={(e) =>
-                    setFormData({ ...formData, phoneNumber: e.target.value })
-                  }
+                  value={phoneNumber}
+                  onChange={handlePhoneInput}
                 />
               </div>
               <button
@@ -187,7 +217,7 @@ const UserForm = ({ attendees, handleRegister }: userProps) => {
                 }
                 disabled={!canSubmit}
               >
-                Register Now
+                {isLoading ? <ClipLoader color={"#FFF"} /> : "Register Now"}
               </button>
             </form>
             {success && (
@@ -214,7 +244,7 @@ const UserForm = ({ attendees, handleRegister }: userProps) => {
               </div>
             )}
           </div>
-          <Attendees attendees={attendees} />
+          <Attendees />
         </motion.div>
       </div>
     </>
