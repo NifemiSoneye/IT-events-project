@@ -1,5 +1,17 @@
 import { fetchBaseQuery, createApi } from "@reduxjs/toolkit/query/react";
 import type { RootState } from "../store";
+import type {
+  BaseQueryFn,
+  FetchArgs,
+  FetchBaseQueryError,
+} from "@reduxjs/toolkit/query";
+import { setCredentials } from "../../features/auth/authSlice";
+import { logOut } from "../../features/auth/authSlice";
+
+type RefreshResult = {
+  accessToken: string;
+};
+
 const baseQuery = fetchBaseQuery({
   baseUrl: "http://localhost:3500",
   credentials: "include",
@@ -13,7 +25,11 @@ const baseQuery = fetchBaseQuery({
   },
 });
 
-/* const baseQueryWithReauth = async (args, api, extraOptions) => {
+const baseQueryWithReauth: BaseQueryFn<
+  FetchArgs | string,
+  unknown,
+  FetchBaseQueryError
+> = async (args, api, extraOptions) => {
   // console.log(args) // request url, method, body
   // console.log(api) // signal, dispatch, getState()
   // console.log(extraOptions) //custom like {shout: true}
@@ -29,22 +45,26 @@ const baseQuery = fetchBaseQuery({
 
     if (refreshResult?.data) {
       // store the new token
-      api.dispatch(setCredentials({ ...refreshResult.data }));
+      api.dispatch(
+        setCredentials({ ...(refreshResult.data as RefreshResult) }),
+      );
 
       // retry original query with new access token
       result = await baseQuery(args, api, extraOptions);
     } else {
       if (refreshResult?.error?.status === 403) {
-        refreshResult.error.data.message = "Your login has expired.";
+        (refreshResult.error.data as { message: string }).message =
+          "Your login has expired.";
       }
+      api.dispatch(logOut());
       return refreshResult;
     }
   }
 
   return result;
-}; */
+};
 export const apiSlice = createApi({
-  baseQuery,
+  baseQuery: baseQueryWithReauth,
   tagTypes: ["Admin", "Attendee"],
   endpoints: (builder) => ({}),
 });

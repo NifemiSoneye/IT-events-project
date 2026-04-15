@@ -7,6 +7,7 @@ import AdminLayout from "./Admin/AdminLayout";
 import ScrollToTop from "./ScrollToTop";
 import Login from "./features/auth/Login";
 import RequireAuth from "./features/auth/RequireAuth";
+import PersistLogin from "./features/auth/PersistLogin";
 function App() {
   return (
     <>
@@ -16,10 +17,12 @@ function App() {
           <Route index element={<UserPage />} />
           <Route path="login" element={<Login />} />
         </Route>
-        <Route element={<RequireAuth />}>
-          <Route path="admin" element={<AdminLayout />}>
-            <Route index element={<AdminPage />} />
-            <Route path=":id" element={<EditForm />} />
+        <Route element={<PersistLogin />}>
+          <Route element={<RequireAuth />}>
+            <Route path="admin" element={<AdminLayout />}>
+              <Route index element={<AdminPage />} />
+              <Route path=":id" element={<EditForm />} />
+            </Route>
           </Route>
         </Route>
       </Routes>

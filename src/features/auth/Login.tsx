@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { setCredentials } from "./authSlice";
 import { useLoginMutation } from "./authApiSlice";
 import { ClipLoader } from "react-spinners";
-
+import useLocalStorage from "../../hook/useLocalStorage";
 const Login = () => {
   const variants: Variants = {
     hidden: { opacity: 0, y: 50 }, // start off invisible & below
@@ -25,6 +25,7 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errMsg, setErrMsg] = useState("");
+  const [persist, setPersist] = useLocalStorage<boolean>("persist", false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const USERNAME_REGEX = /^[A-Za-z][A-Za-z0-9_]{2,23}$/;
@@ -74,7 +75,7 @@ const Login = () => {
     setUsername(e.target.value);
   const handlePwdInput = (e: React.ChangeEvent<HTMLInputElement>) =>
     setPassword(e.target.value);
-  //const handleToggle = () => setPersist((prev) => !prev);
+  const handleToggle = () => setPersist((prev) => !prev);
   return (
     <div className="min-h-screen pb-[1rem]  bg-[#303030] text-white pt-[10vh]">
       {isLoading ? (
@@ -189,6 +190,19 @@ const Login = () => {
               >
                 Login
               </button>
+              <label
+                htmlFor="persist"
+                className="flex items-center w-full gap-2"
+              >
+                <input
+                  type="checkbox"
+                  className="w-[24px] h-[24px]"
+                  id="persist"
+                  onChange={handleToggle}
+                  checked={persist}
+                />
+                Trust This Device
+              </label>
             </form>
             <footer className="my-3 font-semibold">
               <Link to="/">Back to Home</Link>
