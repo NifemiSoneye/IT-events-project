@@ -17,11 +17,11 @@ export const attendeesApiSlice = apiSlice.injectEndpoints({
         },
       }),
       transformResponse: (responseData) => {
-        const loadedNotes = responseData.map((attendee: Attendee) => {
+        const loadedAttendees = responseData.map((attendee: Attendee) => {
           attendee.id = attendee._id;
           return attendee;
         });
-        return attendeesAdapter.setAll(initialState, loadedNotes);
+        return attendeesAdapter.setAll(initialState, loadedAttendees);
       },
       providesTags: (result, error, arg) => {
         if (result?.ids) {
