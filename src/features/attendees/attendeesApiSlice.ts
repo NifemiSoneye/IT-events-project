@@ -66,6 +66,7 @@ export const attendeesApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: (result, error, arg) => [
         { type: "Attendee", id: arg.id },
+        { type: "Attendee", id: "LIST" },
       ],
     }),
   }),

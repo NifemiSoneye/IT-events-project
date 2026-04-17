@@ -4,8 +4,10 @@ import { useRefreshMutation } from "./authApiSlice";
 import useLocalStorage from "../../hook/useLocalStorage";
 import { useSelector } from "react-redux";
 import { selectCurrentToken } from "./authSlice";
+import { useNavigate } from "react-router-dom";
 
 const PersistLogin = () => {
+  const navigate = useNavigate();
   const [persist, setPersist] = useLocalStorage<boolean>("persist", false);
   const token = useSelector(selectCurrentToken);
   const effectRan = useRef(false);
@@ -40,7 +42,11 @@ const PersistLogin = () => {
 
     // eslint-disable-next-line
   }, []);
-
+  useEffect(() => {
+    if (isError) {
+      navigate("/login", { replace: true });
+    }
+  }, [isError, navigate]);
   let content;
   if (!persist) {
     // persist: no
@@ -51,14 +57,7 @@ const PersistLogin = () => {
     console.log("loading");
     content = <p>Loading...</p>;
   } else if (isError) {
-    //persist: yes, token: no
-    console.log("error");
-    content = (
-      <p className="errmsg">
-        {`${(error as any)?.data?.message} -`}
-        <Link to="/login">Please login again</Link>.
-      </p>
-    );
+    content = null;
   } else if (isSuccess && trueSuccess) {
     //persist: yes, token: yes
     console.log("success");

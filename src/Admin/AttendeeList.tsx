@@ -16,7 +16,7 @@ const AttendeeList = ({ attendee }: AttendeeListProps) => {
     });
   };
 
-  const [deleteAttendee, { isSuccess }] = useDeleteAttendeeMutation();
+  const [deleteAttendee] = useDeleteAttendeeMutation();
 
   const onDeleteUserClicked = async () => {
     await deleteAttendee({ id: attendee.id });

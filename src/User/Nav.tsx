@@ -80,7 +80,7 @@ const Nav = () => {
             {link}
           </Link>
         ))}
-        <RouterLink to="/admin" className={mobileLinkBase}>
+        <RouterLink to="/login" className={mobileLinkBase}>
           Admin
         </RouterLink>
       </div>

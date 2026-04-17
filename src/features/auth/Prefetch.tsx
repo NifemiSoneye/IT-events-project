@@ -7,7 +7,7 @@ const Prefetch = () => {
   useEffect(() => {
     store.dispatch(
       attendeesApiSlice.util.prefetch("getAttendee", undefined, {
-        force: true,
+        ifOlderThan: 60,
       }),
     );
   }, []);

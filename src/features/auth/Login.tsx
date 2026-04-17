@@ -16,10 +16,6 @@ const Login = () => {
     },
   };
   const ref = useRef(null);
-  const isInView = useInView(ref, {
-    once: false,
-    amount: 0.05,
-  });
   const userRef = useRef<HTMLInputElement>(null);
   const errRef = useRef<HTMLDivElement>(null);
   const [username, setUsername] = useState("");
@@ -78,138 +74,129 @@ const Login = () => {
   const handleToggle = () => setPersist((prev) => !prev);
   return (
     <div className="min-h-screen pb-[1rem]  bg-[#303030] text-white pt-[10vh]">
-      {isLoading ? (
-        <div className="grid place-content-center">
-          <ClipLoader color={"#FFF"} />
-        </div>
-      ) : (
-        <motion.div
-          ref={ref}
-          variants={variants}
-          initial="hidden"
-          animate="visible"
-        >
-          <div className="px-[1rem] flex justify-center items-center flex-col">
-            <p
-              ref={errRef}
-              className={
-                errMsg
-                  ? "inline-block bg-transparent text-[#b22222] p-1 mb-[0.5em] my-5 font-bold text-2xl"
-                  : "hidden"
-              }
-              aria-live="assertive"
-            >
-              {errMsg}
-            </p>
-            <h1 className="text-center text-3xl font-bold mt-5">Login</h1>
-            <p className="font-semibold text-xl my-[1rem]">
-              Enter Login Details Below:
-            </p>
-            <form
-              onSubmit={handleSubmit}
-              className="bg-[#515151] p-[1rem] border border-transparent rounded-xl lg:w-[35vw] w-full md:w-[70vw]"
-            >
-              <div className="flex flex-col mb-[1rem]">
-                <div className="flex justify-between">
-                  <label
-                    htmlFor="username"
-                    className="text-white text-xl font-semibold"
-                  >
-                    Username
-                  </label>
-                  <p
-                    className={
-                      !validUsername && username.length > 0
-                        ? "text-red-500 text-md font-semibold"
-                        : "hidden"
-                    }
-                  >
-                    Enter a valid username
-                  </p>
-                </div>
-                <input
-                  id="username"
-                  type="text"
-                  required
-                  placeholder="Your username"
-                  autoComplete="off"
-                  className={`bg-gray-200 p-[0.5rem] rounded-lg border outline-none focus:outline-none text-black font-semibold ${
+      <motion.div
+        ref={ref}
+        variants={variants}
+        initial="hidden"
+        animate="visible"
+      >
+        <div className="px-[1rem] flex justify-center items-center flex-col">
+          <p
+            ref={errRef}
+            className={
+              errMsg
+                ? "inline-block bg-transparent text-[#b22222] p-1 mb-[0.5em] my-5 font-bold text-2xl"
+                : "hidden"
+            }
+            aria-live="assertive"
+          >
+            {errMsg}
+          </p>
+          <h1 className="text-center text-3xl font-bold mt-5">Login</h1>
+          <p className="font-semibold text-xl my-[1rem]">
+            Enter Login Details Below:
+          </p>
+          <form
+            onSubmit={handleSubmit}
+            className="bg-[#515151] p-[1rem] border border-transparent rounded-xl lg:w-[35vw] w-full md:w-[70vw]"
+          >
+            <div className="flex flex-col mb-[1rem]">
+              <div className="flex justify-between">
+                <label
+                  htmlFor="username"
+                  className="text-white text-xl font-semibold"
+                >
+                  Username
+                </label>
+                <p
+                  className={
                     !validUsername && username.length > 0
-                      ? "border-red-600 focus:border-red-600"
-                      : username.length === 0
-                        ? "border-transparent"
-                        : "border-green-500"
-                  }`}
-                  value={username}
-                  onChange={handleUserInput}
-                />
+                      ? "text-red-500 text-md font-semibold"
+                      : "hidden"
+                  }
+                >
+                  Enter a valid username
+                </p>
               </div>
-              <div className="flex flex-col mb-[1rem]">
-                <div className="flex justify-between">
-                  <label
-                    htmlFor="Password"
-                    className="text-white text-xl font-semibold"
-                  >
-                    Password
-                  </label>
-                  <p
-                    className={
-                      !validPassword && password.length > 0
-                        ? "text-red-500 text-md font-semibold"
-                        : "hidden"
-                    }
-                  >
-                    Enter a valid Password
-                  </p>
-                </div>
-                <input
-                  id="password"
-                  type="password"
-                  required
-                  placeholder="your password"
-                  autoComplete="off"
-                  className={`bg-gray-200 p-[0.5rem] rounded-lg border outline-none focus:outline-none text-black font-semibold ${
+              <input
+                id="username"
+                type="text"
+                required
+                placeholder="Your username"
+                autoComplete="off"
+                className={`bg-gray-200 p-[0.5rem] rounded-lg border outline-none focus:outline-none text-black font-semibold ${
+                  !validUsername && username.length > 0
+                    ? "border-red-600 focus:border-red-600"
+                    : username.length === 0
+                      ? "border-transparent"
+                      : "border-green-500"
+                }`}
+                value={username}
+                onChange={handleUserInput}
+              />
+            </div>
+            <div className="flex flex-col mb-[1rem]">
+              <div className="flex justify-between">
+                <label
+                  htmlFor="Password"
+                  className="text-white text-xl font-semibold"
+                >
+                  Password
+                </label>
+                <p
+                  className={
                     !validPassword && password.length > 0
-                      ? "border-red-600 focus:border-red-600"
-                      : password.length === 0
-                        ? "border-transparent"
-                        : "border-green-500"
-                  }`}
-                  value={password}
-                  onChange={handlePwdInput}
-                />
+                      ? "text-red-500 text-md font-semibold"
+                      : "hidden"
+                  }
+                >
+                  Enter a valid Password
+                </p>
               </div>
+              <input
+                id="password"
+                type="password"
+                required
+                placeholder="your password"
+                autoComplete="off"
+                className={`bg-gray-200 p-[0.5rem] rounded-lg border outline-none focus:outline-none text-black font-semibold ${
+                  !validPassword && password.length > 0
+                    ? "border-red-600 focus:border-red-600"
+                    : password.length === 0
+                      ? "border-transparent"
+                      : "border-green-500"
+                }`}
+                value={password}
+                onChange={handlePwdInput}
+              />
+            </div>
 
-              <button
-                className={
-                  canSubmit
-                    ? "bg-green-500 flex items-center justify-center text-[1.5rem] border border-transparent rounded-3xl p-[0.5rem] mb-[1rem] w-[100%]"
-                    : "bg-green-300 flex items-center justify-center text-[1.5rem] border border-transparent rounded-3xl p-[0.5rem] mb-[1rem] w-[100%]"
-                }
-                disabled={!canSubmit}
-              >
-                Login
-              </button>
-              <label
-                htmlFor="persist"
-                className="flex items-center w-full gap-2"
-              >
-                <input
-                  type="checkbox"
-                  className="w-[24px] h-[24px]"
-                  id="persist"
-                  onChange={handleToggle}
-                  checked={persist}
-                />
-                Trust This Device
-              </label>
-            </form>
-            <footer className="my-3 font-semibold">
-              <Link to="/">Back to Home</Link>
-            </footer>
-          </div>
-        </motion.div>
-      )}
+            <button
+              className={
+                canSubmit
+                  ? "bg-green-500 flex items-center justify-center text-[1.5rem] border border-transparent rounded-3xl p-[0.5rem] mb-[1rem] w-[100%]"
+                  : "bg-green-300 flex items-center justify-center text-[1.5rem] border border-transparent rounded-3xl p-[0.5rem] mb-[1rem] w-[100%]"
+              }
+              disabled={!canSubmit}
+            >
+              {isLoading ? <ClipLoader color={"#FFF"} /> : "Login"}
+            </button>
+            <label htmlFor="persist" className="flex items-center w-full gap-2">
+              <input
+                type="checkbox"
+                className="w-[24px] h-[24px]"
+                id="persist"
+                onChange={handleToggle}
+                checked={persist}
+              />
+              Trust This Device
+            </label>
+          </form>
+          <footer className="my-3 font-semibold">
+            <Link to="/">Back to Home</Link>
+          </footer>
+        </div>
+      </motion.div>
     </div>
   );
 };
