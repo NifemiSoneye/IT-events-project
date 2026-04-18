@@ -1,6 +1,5 @@
-import { type Attendee } from "../types";
 import AttendeeList from "./AttendeeList";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useGetAttendeeQuery } from "../features/attendees/attendeesApiSlice";
 import { ClipLoader } from "react-spinners";
@@ -10,14 +9,11 @@ import { useGetAnalyticsQuery } from "../features/attendees/attendeesApiSlice";
 
 const AdminPage = () => {
   const { data: analytics } = useGetAnalyticsQuery(undefined);
-  const { isLoading, isSuccess, isError, error } = useGetAttendeeQuery(
-    undefined,
-    {
-      pollingInterval: 60000,
-      refetchOnFocus: true,
-      refetchOnMountOrArgChange: true,
-    },
-  );
+  const { isLoading } = useGetAttendeeQuery(undefined, {
+    pollingInterval: 60000,
+    refetchOnFocus: true,
+    refetchOnMountOrArgChange: true,
+  });
   const attendees = useSelector(selectAllAttendees);
 
   const getTimeAgo = (dateString: string) => {
@@ -38,7 +34,6 @@ const AdminPage = () => {
     return `${diffInDays} day(s) ago`;
   };
   const [search, setSearch] = useState("");
-  const today = new Date().toDateString();
   const searchResults =
     attendees?.filter((a) =>
       a.username.toLowerCase().includes(search.toLowerCase()),

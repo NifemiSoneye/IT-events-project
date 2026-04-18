@@ -1,4 +1,4 @@
-import { Outlet, Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { useRefreshMutation } from "./authApiSlice";
 import useLocalStorage from "../../hook/useLocalStorage";
@@ -8,13 +8,13 @@ import { useNavigate } from "react-router-dom";
 
 const PersistLogin = () => {
   const navigate = useNavigate();
-  const [persist, setPersist] = useLocalStorage<boolean>("persist", false);
+  const [persist] = useLocalStorage<boolean>("persist", false);
   const token = useSelector(selectCurrentToken);
   const effectRan = useRef(false);
 
   const [trueSuccess, setTrueSuccess] = useState(false);
 
-  const [refresh, { isUninitialized, isLoading, isSuccess, isError, error }] =
+  const [refresh, { isUninitialized, isLoading, isSuccess, isError }] =
     useRefreshMutation();
 
   useEffect(() => {
