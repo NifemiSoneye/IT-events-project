@@ -96,6 +96,12 @@ const Login = () => {
           <p className="font-semibold text-xl my-[1rem]">
             Enter Login Details Below:
           </p>
+          <p className="text-gray-400 text-sm mb-4">
+            Demo credentials — Username:{" "}
+            <span className="text-green-400 font-semibold">admin</span> /
+            Password:{" "}
+            <span className="text-green-400 font-semibold">admin123</span>
+          </p>
           <form
             onSubmit={handleSubmit}
             className="bg-[#515151] p-[1rem] border border-transparent rounded-xl lg:w-[35vw] w-full md:w-[70vw]"

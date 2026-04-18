@@ -1,73 +1,61 @@
-# React + TypeScript + Vite
+Tech Meetup 2026 — Frontend
+A fullstack event management app built with React, TypeScript, and Redux Toolkit. Admins can manage attendees, view analytics, and handle authentication — all with a clean, dark-themed UI.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🔗 Live Demo & Related Repos
+• Live Site: https://tech-event-teal.vercel.app
+• Backend Repo: github.com/NifemiSoneye/It-events-backend
+• Backend API: https://it-events-backend.onrender.com
 
-Currently, two official plugins are available:
+🛠 Tech Stack
+• React 18 + TypeScript — Component-based UI with full type safety
+• Redux Toolkit + RTK Query — Global state management and data fetching with caching
+• React Router v6 — Client-side routing with protected routes
+• Tailwind CSS + Framer Motion — Utility-first styling with animations
+• JWT Authentication — Access + refresh token auth with token rotation
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+✨ Features
+Authentication
+• JWT login with access token (15min) + refresh token (7 days)
+• PersistLogin — survives page reload via refresh token
+• RequireAuth — protects admin routes
+• Auto-redirect to login on token expiry
+Admin Dashboard
+• View all registered attendees with search
+• Analytics: total registrations, spots left, registrations today
+• Create, edit, and delete attendees
+• Logout with token cleanup
+Public Page
+• Attendee registration form with validation
+• Email confirmation sent on successful registration
 
-## React Compiler
+📁 Project Structure
+• src/app/api/apiSlice.ts — Base RTK Query API slice with re-auth logic
+• src/app/store.ts — Redux store configuration
+• src/features/auth/ — Login, authSlice, authApiSlice, RequireAuth, PersistLogin
+• src/features/attendees/ — attendeesApiSlice with entity adapter
+• src/User/ — Public-facing registration form
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+🚀 Getting Started
+Prerequisites
+• Node.js 18+
+• npm or yarn
+Installation
 
-## Expanding the ESLint configuration
+1. Clone the repo:
+   git clone https://github.com/NifemiSoneye/IT-events-project
+2. Install dependencies:
+   npm install
+3. Create a .env file:
+   VITE_API_URL=http://localhost:3500
+4. Start the dev server:
+   npm run dev
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+🔐 Environment Variables
+Create a .env file in the root:
+VITE_API_URL=http://localhost:3500
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+☁️ Deployment
+Deployed on Vercel. Auto-deploys on push to main.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+👤 Author
+GitHub: github.com/NifemiSoneye
